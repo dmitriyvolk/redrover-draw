@@ -1,14 +1,8 @@
 package transformations;
 
-import domain.GenericShape;
 import domain.Point;
-import domain.Shape;
-import domain.Transformation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MoveBy implements Transformation {
+public class MoveBy extends PerPointTransformation {
 
     private final int x;
     private final int y;
@@ -19,12 +13,8 @@ public class MoveBy implements Transformation {
     }
 
     @Override
-    public Shape transform(Shape origin) {
-        List<Point> result = new ArrayList<>();
-        for (Point point: origin.getPoints()) {
-            Point newPoint = new Point(point.getX() + x, point.getY() + y);
-            result.add(newPoint);
-        }
-        return new GenericShape(result);
+    protected Point transformPoint(Point originalPoint) {
+        Point newPoint = new Point(originalPoint.getX() + x, originalPoint.getY() + y);
+        return newPoint;
     }
 }
